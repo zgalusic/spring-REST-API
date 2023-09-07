@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -142,7 +143,7 @@ public class ProductServiceImpl implements ProductService {
             String kupovniTecajString = tecajnaListaItems[0].getKupovniTecaj();
             kupovniTecajString = kupovniTecajString.replace(",", ".");
             BigDecimal kupovniTecaj = new BigDecimal(kupovniTecajString);
-            convertedPrice = price.multiply(kupovniTecaj);
+            convertedPrice = price.multiply(kupovniTecaj).setScale(2, RoundingMode.HALF_UP);
         }
 
         return convertedPrice;
