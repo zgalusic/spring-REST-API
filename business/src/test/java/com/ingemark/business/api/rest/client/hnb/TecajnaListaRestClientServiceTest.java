@@ -16,8 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class TecajnaListaRestClientServiceTest {
 
     @Autowired
-    private TecajnaListaRestClientServiceImpl tecajnaListaRestClientService;
-
+    private TecajnaListaRestClientService tecajnaListaRestClientService;
 
     @Test
     void fetchAll() {
