@@ -1,10 +1,12 @@
 package com.ingemark.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDto implements Serializable {
-
     private static final long serialVersionUID = 628774163662247291L;
     private Long id;
     private String code;
