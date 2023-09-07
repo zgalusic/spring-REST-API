@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<property name="MODULE_NAME" value="business"/>
+
+	<springProperty scope="context" name="APP_LEVEL" source="app.log.level"/>
+	<springProperty scope="context" name="ROOT_LEVEL" source="root.log.level"/>
+
+	<property name="VERBOSE_PATTERN_LAYOUT" value="[%date{dd.MM.yyyy HH:mm:ss.SSS}] : %-5level : %logger{0}.%method.[%line] : %thread%n: %message%n%exception"/>
+	<property name="CONCISE_PATTERN_LAYOUT" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+	
+	<contextName>${MODULE_NAME}</contextName>
+	
+	<appender name="appConsoleAppender"
+			  class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<includeCallerData>true</includeCallerData>
+			<customFields>{"logtype":"app",
+				"appname":"spring-rest-api",
+				"appmodule":"business"}</customFields>
+			<fieldNames>
+				<caller>caller</caller>
+				<callerClass>class</callerClass>
+				<callerMethod>method</callerMethod>
+				<callerFile>file</callerFile>
+				<callerLine>line</callerLine>
+			</fieldNames>
+		</encoder>
+	</appender>
+	
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${VERBOSE_PATTERN_LAYOUT}</pattern>
+        </layout>
+    </appender>
+    
+    <springProfile name="local">
+
+		<logger name="com.ingemark" level="${APP_LEVEL}" additivity="false">
+	    	<appender-ref ref="appConsoleAppender" />
+		</logger>
+		
+		<logger name="org.springframework" level="WARN" additivity="false">
+	    	<appender-ref ref="appConsoleAppender" />
+		</logger>
+		
+		<root level="${ROOT_LEVEL}" additivity="false">
+	        <appender-ref ref="appConsoleAppender" />
+		</root>
+    
+    </springProfile>
+    
+    <springProfile name="develop">
+		<logger name="com.ingemark" level="${APP_LEVEL}" additivity="false">
+	    	<appender-ref ref="STDOUT" />
+		</logger>
+		
+		<logger name="org.springframework" level="WARN" additivity="false">
+	    	<appender-ref ref="STDOUT" />
+		</logger>
+		
+		<root level="${ROOT_LEVEL}" additivity="false">
+	        <appender-ref ref="STDOUT" />
+		</root>
+    </springProfile>
+
+</configuration>
+
+

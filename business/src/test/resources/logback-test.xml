@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<property name="MODULE_NAME" value="business"/>
+
+	<property name="APP_LEVEL" value="DEBUG" />
+	<property name="ROOT_LEVEL" value="DEBUG" />
+
+	<property name="VERBOSE_PATTERN_LAYOUT" value="[%date{dd.MM.yyyy HH:mm:ss.SSS}] : %-5level : %logger{0}.%method.[%line] : %thread%n: %message%n%exception"/>
+	<property name="CONCISE_PATTERN_LAYOUT" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+	
+	<contextName>${MODULE_NAME}</contextName>
+	
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${VERBOSE_PATTERN_LAYOUT}</pattern>
+        </layout>
+    </appender>
+    
+	<logger name="com.ingemark" level="${APP_LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="org.springframework" level="WARN" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="${ROOT_LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>
+
+
