@@ -69,6 +69,8 @@ public class ProductServiceImpl implements ProductService {
 
         try {
 
+            ProductBusinessValidator.validate(productDto);
+
             Product product = ProductMapper.map(productDto);
             TecajnaListaItem[] tecajnaListaItems = tecajnaListaRestClientService.fetch("USD");
             product.setPriceUsd(convertPrice(product.getPriceEur(), tecajnaListaItems));
@@ -87,6 +89,8 @@ public class ProductServiceImpl implements ProductService {
     public void update(ProductDto productDto) {
 
         try {
+            ProductBusinessValidator.validate(productDto);
+
             Optional<Product> productOptional = productRepository.findById(productDto.getId());
             productOptional.ifPresent(p -> {
 
