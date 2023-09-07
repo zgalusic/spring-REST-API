@@ -23,8 +23,8 @@ public abstract class RestClient {
             return restTemplate.getForObject(url, clazz);
 
         } catch (Exception e) {
-            // TODO create specific exception
-            throw e;
+
+            throw new RestClientGeneralException(e);
         }
     }
 }
