@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -50,16 +50,11 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(page, size, sortDirection, sortField.getName());
 
         Page<Product> productPage = productRepository.findAll(pageable);
-        List<ProductDto> productDtoList = new ArrayList<>();
 
-        productPage
+        return productPage
                 .stream()
-                .forEach(product -> {
-                    ProductDto productDto = ProductMapper.map(product);
-                    productDtoList.add(productDto);
-                });
-
-        return productDtoList;
+                .map(ProductMapper::map)
+                .collect(Collectors.toList());
     }
 
     @Override
