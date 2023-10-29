@@ -1,4 +1,4 @@
-Assignment
+Assignment #1: Spring REST API
 
 Create a REST web service using the following technology stack:
     ● Java 8+
