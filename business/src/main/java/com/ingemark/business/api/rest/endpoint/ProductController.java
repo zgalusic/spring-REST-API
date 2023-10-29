@@ -2,9 +2,11 @@ package com.ingemark.business.api.rest.endpoint;
 
 import com.ingemark.business.service.ProductService;
 import com.ingemark.dto.ProductDto;
+import com.ingemark.dto.ProductField;
 import com.ingemark.wrapper.ResponseWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,10 +54,13 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public ResponseWrapper<List<ProductDto>> fetchAll() {
+    public ResponseWrapper<List<ProductDto>> fetchAll(@RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "2") int size,
+                                                      @RequestParam(defaultValue = "ID") ProductField sortField,
+                                                      @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection) {
 
         LOGGER.info("Fetching all products");
-        List<ProductDto> productDtoList = productService.fetchAll();
+        List<ProductDto> productDtoList = productService.fetchAll(page, size, sortDirection, sortField);
         ResponseWrapper<List<ProductDto>> productListResponseWrapper = new ResponseWrapper<>();
         productListResponseWrapper.setData(productDtoList);
 

@@ -1,9 +1,11 @@
 package com.ingemark.business.service;
 
 import com.ingemark.dto.ProductDto;
+import com.ingemark.dto.ProductField;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
@@ -30,7 +32,7 @@ public class ProductServiceTest {
 
         long id = productService.create(productDto);
 
-        List<ProductDto> productDtoList = productService.fetchAll();
+        List<ProductDto> productDtoList = productService.fetchAll(0, 10, Sort.Direction.DESC, ProductField.ID);
 
         assertNotNull(productDtoList);
         assertEquals(1, productDtoList.size());
