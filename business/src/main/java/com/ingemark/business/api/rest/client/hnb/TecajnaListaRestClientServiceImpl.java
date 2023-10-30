@@ -5,6 +5,7 @@ import com.ingemark.business.api.rest.client.hnb.model.TecajnaListaItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -24,6 +25,7 @@ public class TecajnaListaRestClientServiceImpl extends RestClient implements Tec
     }
 
     @Override
+    @Cacheable("exchangeRatesCache")
     public TecajnaListaItem[] fetch() {
 
         LOGGER.info("Dohvat cijele tečajne liste.");
@@ -32,6 +34,7 @@ public class TecajnaListaRestClientServiceImpl extends RestClient implements Tec
     }
 
     @Override
+    @Cacheable(cacheNames="exchangeRateCache", key="#valuta")
     public TecajnaListaItem[] fetch(String valuta) {
 
         LOGGER.info("Dohvat tečajne liste za valutu {}.", valuta);

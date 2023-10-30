@@ -2,7 +2,11 @@ package com.ingemark.business.api.rest.client.hnb.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TecajnaListaItem{
+import java.io.Serializable;
+
+public class TecajnaListaItem implements Serializable {
+
+	private static final long serialVersionUID = 7122548021890748478L;
 
 	@JsonProperty("drzava_iso")
 	private String drzavaIso;
