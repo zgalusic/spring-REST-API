@@ -19,6 +19,8 @@
 		<common-model.version>${project.version}</common-model.version>
 		<logstash.version>6.4</logstash.version>
 		<janino.version>3.1.2</janino.version>
+		<ehcache.version>3.8.1</ehcache.version>
+		<cache-api.version>1.1.1</cache-api.version>
 		<springdoc-openapi-ui.version>1.7.0</springdoc-openapi-ui.version>
 	</properties>
 
@@ -56,6 +58,20 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>${ehcache.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+			<version>${cache-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
